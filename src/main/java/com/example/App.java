@@ -1,18 +1,27 @@
 package main.java.com.example;
 
+import java.sql.SQLException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 public class App {
 
-    public static void main(String[] args) throws Exception {
+    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
+    public static void main(String[] args) {
         Calculator calc = new Calculator();
 
-        System.out.println(calc.calculate(10, 5, "add-again"));
+        // FIXED: Replaced System.out with proper logging
+        LOGGER.log(Level.INFO, "Calculation result: {0}", calc.calculate(10, 5, "add"));
 
         UserService service = new UserService();
-        service.findUser("admin");
-        service.deleteUser("admin"); // NEW dangerous call
+        
+        // FIXED: Proper exception handling instead of generic throws Exception
+        try {
+            service.findUser("admin");
+            service.deleteUser("admin");
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Database operation failed", e);
+        }
     }
 }
-
-
-

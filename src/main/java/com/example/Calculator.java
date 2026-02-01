@@ -2,41 +2,34 @@ package main.java.com.example;
 
 public class Calculator {
 
-    // Code Smell: Long method + high complexity
+    // FIXED: Refactored to reduce complexity and improve maintainability
     public int calculate(int a, int b, String op) {
-
-        if(op.equals("add")) {
-            return a + b;
-        }
-        if(op.equals("sub")) {
-            return a - b;
-        }
-        if(op.equals("mul")) {
-            return a * b;
-        }
-        if(op.equals("div")) {
-            if(b == 0) {
+        switch (op) {
+            case "add":
+                return add(a, b);
+            case "sub":
+                return a - b;
+            case "mul":
+                return a * b;
+            case "div":
+                return divide(a, b);
+            case "mod":
+                return a % b;
+            default:
                 return 0;
-            }
-            return a / b;
         }
-        if(op.equals("mod")) {
-            return a % b;
-        }
-
-        return 0;
     }
 
-    // Code Duplication (students must remove)
-    public int addNumbers(int x, int y) {
-        return x + y;
+    // FIXED: Kept only one addition method (removed duplicates)
+    public int add(int a, int b) {
+        return a + b;
     }
 
-    public int divide(int a, int b) {
+    // FIXED: Proper division with error handling
+    private int divide(int a, int b) {
         if (b == 0) {
             throw new ArithmeticException("Cannot divide by zero");
         }
         return a / b;
     }
-
 }

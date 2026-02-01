@@ -19,8 +19,9 @@ public class UserService {
 
     // FIXED: SQL Injection prevented with PreparedStatement
     // FIXED: Using try-with-resources to auto-close connections
+    // FIXED: Specify exact columns instead of SELECT *
     public void findUser(String username) throws SQLException {
-        String query = "SELECT * FROM users WHERE name = ?";
+        String query = "SELECT id, name, email FROM users WHERE name = ?";
         
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, password);
              PreparedStatement pstmt = conn.prepareStatement(query)) {

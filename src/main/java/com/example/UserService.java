@@ -37,16 +37,5 @@ public class UserService {
         }
     }
 
-    // FIXED: SQL Injection prevented + proper resource management
-    public void deleteUser(String username) throws SQLException {
-        String query = "DELETE FROM users WHERE name = ?";
-        
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, password);
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-            
-            pstmt.setString(1, username);
-            int rowsAffected = pstmt.executeUpdate();
-            LOGGER.log(Level.INFO, "Deleted {0} user(s)", rowsAffected);
-        }
-    }
+
 }

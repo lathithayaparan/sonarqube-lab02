@@ -2,7 +2,6 @@ package main.java.com.example;
 
 public class Calculator {
 
-    // FIXED: Refactored to reduce complexity and improve maintainability
     public int calculate(int a, int b, String op) {
         switch (op) {
             case "add":
@@ -20,12 +19,10 @@ public class Calculator {
         }
     }
 
-    // FIXED: Kept only one addition method (removed duplicates)
     public int add(int a, int b) {
         return a + b;
     }
 
-    // FIXED: Proper division with error handling
     private int divide(int a, int b) {
         if (b == 0) {
             throw new ArithmeticException("Cannot divide by zero");
